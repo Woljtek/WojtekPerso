@@ -7,6 +7,8 @@
 sudo apt install git
 
 git init
+git config --global user.email "fabien.craheix@gmail.com"
+git config --global user.name "Woljtek"
 
 # List of my repositories and clone
 REPO1="git@github.com:Woljtek/WojtekPerso.git"
