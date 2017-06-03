@@ -1,4 +1,4 @@
-# Init: 03/0/2017
+# Init: 03/06/2017
 # Author: F. CRHX
 # Synopsis: Mount the second disk on /media/bigDisk
 # Note UUID has to be manually update
