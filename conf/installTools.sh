@@ -16,3 +16,5 @@ sudo apt install dos2unix
 sudo apt install vim
 #sudo apt install notepad
 
+# Other tools
+sudo apt install dropbox
