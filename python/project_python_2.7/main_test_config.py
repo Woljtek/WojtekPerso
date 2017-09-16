@@ -40,17 +40,21 @@ else:
 str_section   = "MySection"
 int_section   = 13
 wrong_section = "UnknownSection"
+new_section   = "NewSection" # has to be deleted previous starting test
 
 
 # Defined option
 str_option   = "MyOption"
 int_option   = 666
 wrong_option = "UnknownOption"
+set_int_option = 'IntOption'
+set_str_option = 'StrOption'
 
 # Define
 str_value = "MyValue"
 int_value = 5
 
+# Part 1: get tests
 print "\n%s1 - Start get_properties test" % cfg.L_HEADER
 print "%s1.1 - Succes tests\n"  % cfg.L_HEADER
 
@@ -98,4 +102,23 @@ print "Expected value: False"
 print "Returned value: %s" % ret
 lib_util.print_error_results(num_test, ret)
 
+# Part 2: set tests
 print "\n%s2- Start set_properties test" % cfg.L_HEADER
+print "%s1.1 - Succes tests\n"  % cfg.L_HEADER
+
+num_test = "SS01"
+print "%s: set_properties(prop_file, str_section, set_str_option, str_value)" % num_test
+ret = lib_util.set_properties(prop_file, str_section, set_str_option, str_value)
+print "Expected value: True"
+print "Returned value: %s" % ret
+lib_util.print_test_results(num_test, ret)
+
+num_test = "SS02"
+print "%s: set_properties(prop_file, str_section, set_int_option, int_value)" % num_test
+ret = lib_util.set_properties(prop_file, str_section, set_int_option, int_value)
+print "Expected value: True"
+print "Returned value: %s" % ret
+lib_util.print_test_results(num_test, ret)
+
+print "%s1.2 - Error tests\n"  % cfg.L_HEADER
+print "No error test, Section/Option key is created if it doasnot exist"

@@ -37,7 +37,7 @@ def get_properties(prop, section, option):
     except Exception, e_msg:
         print "%s cannot get %s/%s option in %s file" % (cfg.L_ERROR, section, option, prop)
         print "%s %s" %(cfg.L_EXCEPTION, e_msg)
-        return 0
+        return False
 
 def set_properties(prop, section, option, value):
     """
@@ -60,6 +60,7 @@ def set_properties(prop, section, option, value):
         f = open(prop, 'w+')
         config.write(f)
         f.close()
+        return True
 
     except Exception, e_msg:
         print "%s cannot set %s into %s/%s option in %s file" % (cfg.L_ERROR, value, section, option, prop)
