@@ -26,3 +26,6 @@ sudo apt-get update
 sudo apt-get install ubuntu-make
 umake ide pycharm
 
+# Firt start (with default installation path
+/root/.local/share/umake/ide//bin/pycharm.sh 
+
