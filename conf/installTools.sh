@@ -18,3 +18,11 @@ sudo apt install vim
 
 # Other tools
 sudo apt install dropbox
+
+# Install Pycharm IDE (not tested 2017-06-17)
+# Doawnload umake : command line tool for developers. umake lets you easily install a number of development tools in Ubuntu and close distributions
+sudo add-apt-repository ppa:ubuntu-desktop/ubuntu-make
+sudo apt-get update
+sudo apt-get install ubuntu-make
+umake ide pycharm
+
