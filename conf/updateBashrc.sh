@@ -14,7 +14,7 @@ sed -i "s;ls -A;ls -lA;g" $MYBASHRC
 
 # colorize prompt
 # uncomment for a colored prompt
-sed -i "s;#force_color_prompt=yes;force_color_prompt=yes/g" $MYBASHRC
+sed -i "s;#force_color_prompt=yes;force_color_prompt=yes;g" $MYBASHRC
 
 # Replace only first PS1
 npm install -g git-ps1
@@ -24,4 +24,8 @@ npm install -g git-ps1
 # set aliases
 # set aliases $MYALIASES
 
+# Add pycharm alias
+echo "alias pycharm=\'/root/.local/share/umake/ide/pycharm/bin/pycharm.sh\'" >> $MYALIASES
+
 source $MYALIASES $MYBASHRC
+
