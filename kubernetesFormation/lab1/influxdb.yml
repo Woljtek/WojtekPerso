@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-influxdb
+  labels:
+    app: myapp
+spec:
+  containers:
+    - name: influxdb
+      image: influxdb
+      env:
+        - name: INFLUXDB_ADMIN_USER
+          value: Admin 
+        - name: INFLUXDB_ADMIN_PASSWORD
+          value: ChangeIt
+        - name: INFLUXDB_USER
+          value: User
+        - name: INFLUXDB_USER_PASSWORD
+          value: UserPwd

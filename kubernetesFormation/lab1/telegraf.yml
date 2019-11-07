@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-telegraf
+  labels:
+    app: myapp
+spec:
+  containers:
+    - name: telegraf-cf-weather
+      image: pockost/telegraf-cf-weather
+      env:
+        - name: INFLUXDB_HOST
+          value: 172.17.0.6
+        - name: INFLUXDB_PORT
+          value: '8086'
+        - name: INFLUXDB_NAME
+          value: influxdb
+        - name: INFLUXDB_USER
+          value: User
+        - name: INFLUXDB_PASSWORD
+          value: UserPwd

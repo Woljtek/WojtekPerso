@@ -1,0 +1,9 @@
+kubectl apply -f grafana.yml
+kubectl delete pod pod-grafana
+kubectl expose pod pod-grafana --type=LoadBalancer
+kubectl logs pod-grafana
+kubectl describe svc pod-grafana
+kubectl delete svc pod-grafana
+kubectl get pod
+minikube service grafana
+
