@@ -1,0 +1,138 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: d-grafana
+  labels:
+    app: grafana
+    component: lab2
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      component: lab2
+  template:
+    metadata:
+      labels:
+        component: lab2
+    spec:
+      containers:
+        - name: grafana
+          image: grafana/grafana
+          ports:
+          - containerPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: d-influxdb
+  labels:
+    app: influx-db
+    component: lab2
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      component: lab2
+  template:
+    metadata:
+      labels:
+        app: influxdb-l
+        component: lab2
+    spec: 
+      containers:
+        - name: influxdb
+          image: influxdb
+          env:
+            - name: INFLUXDB_ADMIN_USER
+              value: Admin 
+            - name: INFLUXDB_ADMIN_PASSWORD
+              value: ChangeIt
+            - name: INFLUXDB_USER
+              value: User
+            - name: INFLUXDB_USER_PASSWORD
+              value: UserPwd
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: d-telegraf
+  labels:
+    app: cf-telegraf
+    component: lab2
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      component: lab2
+  template:
+    metadata:
+      labels:
+        component: lab2
+    spec:
+      containers:
+        - name: telegraf-cf-weather
+          image: pockost/telegraf-cf-weather
+          env:
+            - name: INFLUXDB_HOST
+              value: telegraf-to-influxdb-service
+            - name: INFLUXDB_PORT
+              value: '8086'
+            - name: INFLUXDB_NAME
+              value: influxdb
+            - name: INFLUXDB_USER
+              value: User
+            - name: INFLUXDB_PASSWORD
+              value: UserPwd
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: telegraf-to-influxdb-service
+  labels:
+    app: svc-telegraf-influx
+    component: lab2
+spec:
+  selector:
+    app: influxdb-l
+  ports:
+    - name: http-i
+      protocol: TCP
+      port: 8086
+      targetPort: 8086
+---
+apiVersion: v1
+kind: Service 
+metadata:
+  name: service-grafana
+  labels:
+    app: service-grafana
+    component: lab2
+spec:
+  selector:
+    component: lab2
+  type: LoadBalancer
+  ports:
+    - name: http-g
+      port: 80
+      targetPort: 3000
+      protocol: TCP
+---
+apiVersion : extensions/v1beta1
+kind: Ingress
+metadata:
+  name: access-ingress
+  labels:
+    app: ingress-proxy
+    component: lab2
+spec:
+  rules:
+    - host: monitoring.example.lan
+      http: 
+        paths: 
+          - path: /influxdb      
+            backend:
+              serviceName: telegraf-to-influxdb-service
+              servicePort: http-i
+          - backend:
+              serviceName: service-grafana
+              servicePort: http-g

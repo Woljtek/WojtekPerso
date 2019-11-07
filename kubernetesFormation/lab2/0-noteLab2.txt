@@ -1,0 +1,8 @@
+kubectl apply -f allDeployements.yml
+kubectl get svc
+kubectl logs svc telegraf-to-influxdb-service
+kubectl describe service telegraf-to-influxdb-service
+kubectl get ingress
+curl -H 'Host: monitoring.example.lan' 192.168.99.100/influxdb
+curl -H 'Host: monitoring.example.lan' 192.168.99.100/influxdb
+
