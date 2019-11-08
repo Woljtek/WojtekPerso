@@ -1,0 +1,34 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet 
+metadata:
+  name: belzebuth
+  labels:
+    app: lab2
+spec:
+  selector:
+    matchLabels: 
+      name: belzebuth
+  template:
+    metadata:
+      labels:
+        name: belzebuth
+    spec:
+      containers:
+        - name: telegraf
+          image: telegraf
+          volumeMounts:
+          - mountPath: /var/run/docker.sock
+            name: telegraf-sock
+          - mountPath: /etc/telegraf/telegraf.conf
+            name: conf-file
+      volumes:
+        - name: telegraf-sock
+          hostPath:
+            type: Socket
+            path: /var/run/docker.sock
+        - name: conf-file
+          hostPath:
+            type: File
+            path: /home/docker/telegraf.conf
+

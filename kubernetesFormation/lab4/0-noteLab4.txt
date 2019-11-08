@@ -1,0 +1,8 @@
+source <(kubectl completion bash)
+
+kubctl get pvc
+kubctl get pvc
+kubctl get rs # replicas
+
+kubectl get all
+kubectl get all --all-namespace
