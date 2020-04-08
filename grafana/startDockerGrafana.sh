@@ -22,7 +22,7 @@ ENDC='\033[0m'
 is_app_process()
 {
 # $1 APP
-ps -ef | grep $1 | grep -v grep
+ps -ef | grep "$1.conf" | grep -v grep
 if [ $? -ne 0 ] ; then 
   echo -e $YEL"WARNING$ENDC, $1 is not ready,  start it"
   sudo systemctl start $1
